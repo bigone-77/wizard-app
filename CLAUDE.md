@@ -103,9 +103,10 @@
 ## 코드 규칙
 
 - TypeScript strict. `any` 금지
-- 화면은 `app/` (Expo Router), 로직은 `src/features/{기능}/`
+- 코드는 전부 `src/` 안에 둔다. 화면은 `src/app/` (Expo Router), 로직은 `src/features/{기능}/`, 테스트는 `src/__tests__/`
+- `content/`(흐름 JSON, 가이드 md)는 코드가 아니라 루트에 둔다
 - 화면 ID(S01~S13)와 경로는 16-architecture.md 4장 표를 따른다
-- 앱 실행 이동 규칙은 `app/_layout.tsx` 한 곳에서만 처리
+- 앱 실행 이동 규칙은 `src/app/_layout.tsx` 한 곳에서만 처리
 - 사전 설계 흐름의 문구 치환(`{pet_name}`)은 앱이 처리
 - 스타일은 디자인 토큰만 사용. 색·간격을 하드코딩하지 않는다
 - 개체 수 제한, 박사 예산을 앱 코드에 하드코딩하지 않는다 (서버 설정값)
@@ -168,6 +169,7 @@ pnpm install                  # 의존성 설치
 pnpm ios                      # = npx expo run:ios. 개발 빌드를 만들어 시뮬레이터에 설치하고 Metro 실행
 npx expo start --dev-client   # 이미 설치된 개발 빌드에 Metro만 붙임 (네이티브 변경 없을 때)
 pnpm exec tsc --noEmit        # 타입 검사 (strict)
+pnpm test                     # Jest 컴포넌트·화면 테스트
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```
