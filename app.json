@@ -1,16 +1,18 @@
 {
   "expo": {
-    "name": "wizard",
+    "name": "Wizard",
     "slug": "wizard",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "wizard",
+    "scheme": "wizardgecko",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.taeilshin.wizard"
     },
     "android": {
+      "package": "com.taeilshin.wizard",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
