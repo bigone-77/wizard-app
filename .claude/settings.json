@@ -1,8 +1,9 @@
 {
   "permissions": {
-    "additionalDirectories": ["../wizard-app-planning"],
+    "additionalDirectories": ["../wizard-app-planning", "../wizard-backend"],
     "allow": [
       "Read(../wizard-app-planning/**)",
+      "Read(../wizard-backend/**)",
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
       "Bash(gh api user:*)",
@@ -10,6 +11,18 @@
       "Bash(git log:*)",
       "Bash(git branch:*)",
       "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Edit(../wizard-app-planning/**)",
+      "Write(../wizard-app-planning/**)",
+      "Edit(../wizard-backend/**)",
+      "Write(../wizard-backend/**)",
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf:*)"
     ]
   }
 }
