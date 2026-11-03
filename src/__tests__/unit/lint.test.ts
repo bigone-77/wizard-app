@@ -59,7 +59,9 @@ describe('Prettier (지금 코드 스타일)', () => {
   });
 
   it('className을 Tailwind 순서로 정렬한다 (tailwind.config.js를 읽음)', async () => {
-    const out = await format('const x = <View className="typo-base-m-14-1 p-4 flex-1 bg-bg-1" />;\n');
+    const out = await format(
+      'const x = <View className="typo-base-m-14-1 p-4 flex-1 bg-bg-1" />;\n',
+    );
     expect(out).toBe('const x = <View className="flex-1 bg-bg-1 p-4 typo-base-m-14-1" />;\n');
   });
 });

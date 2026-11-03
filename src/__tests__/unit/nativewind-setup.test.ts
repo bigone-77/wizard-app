@@ -12,9 +12,12 @@ describe('NativeWind 설치 (pnpm)', () => {
   const interop = resolve(root, 'node_modules/react-native-css-interop');
 
   // nativewind/babel이 모든 화면의 JSX를 react-native-css-interop/jsx-runtime으로 바꾼다
-  it.each(['jsx-runtime', 'jsx-dev-runtime'])('최상위 node_modules에서 %s를 찾을 수 있다', (mod) => {
-    expect(existsSync(resolve(interop, mod))).toBe(true);
-  });
+  it.each(['jsx-runtime', 'jsx-dev-runtime'])(
+    '최상위 node_modules에서 %s를 찾을 수 있다',
+    (mod) => {
+      expect(existsSync(resolve(interop, mod))).toBe(true);
+    },
+  );
 
   it('직접 설치한 react-native-css-interop은 nativewind가 쓰는 버전과 같다', () => {
     const nativewind = pkg(resolve(root, 'node_modules/nativewind'));

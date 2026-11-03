@@ -7,10 +7,12 @@ import { buildTheme, type ColorTree, toLetterSpacing, toLineHeight } from '@/the
 
 // 색 나무에서 "text.1" 같은 경로로 값을 꺼낸다
 const at = (tree: ColorTree, path: string): string | ColorTree | undefined =>
-  path.split('.').reduce<string | ColorTree | undefined>(
-    (node, key) => (typeof node === 'object' ? node[key] : undefined),
-    tree,
-  );
+  path
+    .split('.')
+    .reduce<string | ColorTree | undefined>(
+      (node, key) => (typeof node === 'object' ? node[key] : undefined),
+      tree,
+    );
 
 const root = resolve(__dirname, '../../..');
 const source = JSON.parse(readFileSync(resolve(root, 'design/wizard-tokens.json'), 'utf8'));
@@ -22,7 +24,10 @@ const minimal = (extra: Record<string, unknown> = {}) => ({
       white: { $type: 'color', $value: '#ffffff' },
       gray: { '400': { $type: 'color', $value: '#99a1af' } },
     },
-    spacing: { x0_5: { $type: 'spacing', $value: '2px' }, x4: { $type: 'spacing', $value: '16px' } },
+    spacing: {
+      x0_5: { $type: 'spacing', $value: '2px' },
+      x4: { $type: 'spacing', $value: '16px' },
+    },
     size: { touch: { $type: 'sizing', $value: '44px' } },
     fontFamilies: { pretendard: { $type: 'fontFamilies', $value: 'Pretendard' } },
     fontWeights: { semibold: { $type: 'fontWeights', $value: 'SemiBold' } },
@@ -131,9 +136,17 @@ describe('실제 토큰 파일 (design/wizard-tokens.json)', () => {
   });
 
   it('Figma 시맨틱 색 이름이 그대로 있다', () => {
-    expect(at(theme.colors, 'text')).toMatchObject({ '1': '#99a1af', '3': '#1e2939', primary: '#7008e7' });
+    expect(at(theme.colors, 'text')).toMatchObject({
+      '1': '#99a1af',
+      '3': '#1e2939',
+      primary: '#7008e7',
+    });
     expect(at(theme.colors, 'bg')).toMatchObject({ '1': '#ffffff', '2': '#f9fafb' });
-    expect(at(theme.colors, 'signal.red')).toEqual({ bg: '#fef2f2', fill: '#e7000b', text: '#c10007' });
+    expect(at(theme.colors, 'signal.red')).toEqual({
+      bg: '#fef2f2',
+      fill: '#e7000b',
+      text: '#c10007',
+    });
   });
 
   it('글자 스타일 20종, 굵기 4종', () => {

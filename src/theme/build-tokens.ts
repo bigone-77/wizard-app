@@ -85,7 +85,8 @@ function makeResolver(tokens: Map<string, Token>) {
     const ref = /^\{([^}]+)\}$/.exec(value);
     if (!ref) return value;
     const path = ref[1];
-    if (seen.includes(path)) throw new Error(`토큰 참조가 순환한다: ${[...seen, path].join(' → ')}`);
+    if (seen.includes(path))
+      throw new Error(`토큰 참조가 순환한다: ${[...seen, path].join(' → ')}`);
     const target = tokens.get(path);
     if (!target) throw new Error(`없는 토큰을 참조한다: {${path}}`);
     if (typeof target.$value !== 'string') throw new Error(`묶음 토큰은 참조할 수 없다: {${path}}`);
@@ -152,7 +153,8 @@ export function buildTheme(source: TokenSource): Theme {
     const v = token.$value;
     if (typeof v === 'string') throw new Error(`그림자 형식이 아니다: shadow.${name}`);
     const r = (key: string) => resolve(v[key] ?? '0');
-    boxShadow[kebab(name)] = `${px(r('x'))} ${px(r('y'))} ${px(r('blur'))} ${px(r('spread'))} ${r('color')}`;
+    boxShadow[kebab(name)] =
+      `${px(r('x'))} ${px(r('y'))} ${px(r('blur'))} ${px(r('spread'))} ${r('color')}`;
   }
 
   // 글자 스타일: Base.m_14_2 → "base-m-14-2" (클래스 typo-base-m-14-2)
@@ -164,7 +166,9 @@ export function buildTheme(source: TokenSource): Theme {
     if (typeof v === 'string') throw new Error(`글자 스타일 형식이 아니다: ${path}`);
     const weight = resolve(v.fontWeight);
     if (!FONT_WEIGHTS.includes(weight)) {
-      throw new Error(`폰트 파일이 없는 굵기다: ${weight} (${path}). 가능한 값: ${FONT_WEIGHTS.join(', ')}`);
+      throw new Error(
+        `폰트 파일이 없는 굵기다: ${weight} (${path}). 가능한 값: ${FONT_WEIGHTS.join(', ')}`,
+      );
     }
     const fontFamily = `${resolve(v.fontFamily)}-${weight}`;
     const fontSize = parseFloat(resolve(v.fontSize));

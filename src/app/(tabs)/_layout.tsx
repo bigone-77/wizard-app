@@ -24,7 +24,10 @@ export default function TabsLayout() {
         name="doctor/index"
         options={{ title: '박사', tabBarButtonTestID: 'tab-doctor' }}
       />
-      <Tabs.Screen name="guide/index" options={{ title: '가이드', tabBarButtonTestID: 'tab-guide' }} />
+      <Tabs.Screen
+        name="guide/index"
+        options={{ title: '가이드', tabBarButtonTestID: 'tab-guide' }}
+      />
     </Tabs>
   );
 }
