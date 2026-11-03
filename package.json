@@ -18,9 +18,11 @@
     "expo-symbols": "~58.0.4",
     "expo-system-ui": "~58.0.7",
     "expo-web-browser": "~58.0.7",
+    "nativewind": "4.2.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",
+    "react-native-css-interop": "0.2.7",
     "react-native-gesture-handler": "~3.3.0",
     "react-native-reanimated": "4.7.1",
     "react-native-safe-area-context": "~5.10.1",
@@ -29,12 +31,16 @@
     "react-native-worklets": "0.13.0"
   },
   "devDependencies": {
+    "@tailwindcss/container-queries": "0.1.1",
     "@testing-library/react-native": "14.1.0",
     "@types/jest": "30.0.0",
     "@types/react": "~19.3.0",
+    "babel-preset-expo": "~58.0.23",
     "jest": "~30.5.2",
     "jest-expo": "~58.0.13",
-    "typescript": "~6.0.3"
+    "tailwindcss": "3.4.19",
+    "typescript": "~6.0.3",
+    "vitest": "5.1.0"
   },
   "scripts": {
     "start": "expo start",
@@ -42,10 +48,25 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "vitest run",
+    "tokens": "node --experimental-strip-types --no-warnings src/theme/build-tokens.ts"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/src/__tests__/unit/",
+      "<rootDir>/src/__tests__/__mocks__/"
+    ],
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/src/__tests__/__mocks__/css-stub.js"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(.pnpm|react-native|@react-native|@react-native-community|expo|@expo|@expo-google-fonts|react-navigation|@react-navigation|@sentry/react-native|native-base|standard-navigation|nativewind|react-native-css-interop))",
+      "/node_modules/react-native-reanimated/plugin/",
+      "/node_modules/@react-native/babel-preset/"
+    ]
   },
   "private": true
 }

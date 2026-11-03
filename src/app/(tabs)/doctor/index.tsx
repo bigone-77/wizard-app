@@ -1,12 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
 // S08 박사 대화
 export default function DoctorScreen() {
-  return <View testID="screen-S08" style={styles.container} />;
+  return <View testID="screen-S08" className="flex-1 bg-bg-1" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

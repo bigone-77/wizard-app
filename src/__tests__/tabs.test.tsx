@@ -1,4 +1,7 @@
 import { fireEvent, renderRouter, screen, within } from 'expo-router/testing-library';
+import { StyleSheet } from 'react-native';
+
+import { colors } from '@/theme';
 
 // renderRouter는 process.cwd() 기준으로 경로를 푼다 (jest는 프로젝트 루트에서 실행)
 const APP_DIR = './src/app';
@@ -19,6 +22,29 @@ describe('하단 탭 (16-architecture 4장 화면과 경로)', () => {
 
     const labels = tabButtons().map((button) => within(button).getByText(/.+/).props.children);
     expect(labels).toEqual(['홈', '기록', '박사', '가이드']);
+  });
+
+  it('선택된 탭은 text.primary, 선택 안 된 탭은 gray.500 (icon.1은 대비가 낮아 쓰지 않음)', async () => {
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+
+    const labelColor = (testId: string) =>
+      StyleSheet.flatten(within(screen.getByTestId(testId)).getByText(/.+/).props.style).color;
+    expect(labelColor('tab-home')).toBe(colors.text.primary);
+    expect(labelColor('tab-records')).toBe(colors.gray['500']);
+    expect(colors.text.primary).toBe('#7008e7');
+    expect(colors.gray['500']).toBe('#6a7282');
+  });
+
+  it('탭 이름은 typo-base-s-12-2 (Pretendard SemiBold 12/16)', async () => {
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+
+    const label = within(screen.getByTestId('tab-home')).getByText('홈');
+    expect(StyleSheet.flatten(label.props.style)).toMatchObject({
+      fontFamily: 'Pretendard-SemiBold',
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: -0.24,
+    });
   });
 
   it.each([
