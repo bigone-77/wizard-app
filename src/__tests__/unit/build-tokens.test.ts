@@ -23,6 +23,7 @@ const minimal = (extra: Record<string, unknown> = {}) => ({
       gray: { '400': { $type: 'color', $value: '#99a1af' } },
     },
     spacing: { x0_5: { $type: 'spacing', $value: '2px' }, x4: { $type: 'spacing', $value: '16px' } },
+    size: { touch: { $type: 'sizing', $value: '44px' } },
     fontFamilies: { pretendard: { $type: 'fontFamilies', $value: 'Pretendard' } },
     fontWeights: { semibold: { $type: 'fontWeights', $value: 'SemiBold' } },
     fontSize: { '14': { $type: 'fontSizes', $value: '14' } },
@@ -84,6 +85,13 @@ describe('간격', () => {
   });
 });
 
+describe('크기', () => {
+  it('size.touch를 h-touch, min-h-touch 등에 쓸 크기로 만든다', () => {
+    const theme = buildTheme(minimal());
+    expect(theme.size).toEqual({ touch: '44px' });
+  });
+});
+
 describe('글자 스타일', () => {
   it('자간 -2%는 글자 크기 기준 px로 바꾼다', () => {
     expect(toLetterSpacing('-2%', 14)).toBe(-0.28);
@@ -136,6 +144,10 @@ describe('실제 토큰 파일 (design/wizard-tokens.json)', () => {
       'Pretendard-Regular',
       'Pretendard-SemiBold',
     ]);
+  });
+
+  it('터치 영역 44px이 있다', () => {
+    expect(theme.size.touch).toBe('44px');
   });
 
   it('그림자는 CSS box-shadow 문자열', () => {

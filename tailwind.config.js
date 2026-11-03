@@ -32,6 +32,13 @@ module.exports = {
     fontWeight: {},
     lineHeight: {},
     letterSpacing: {},
+    // 크기 토큰은 간격 위에 더한다 (h-4도 h-touch도 됨). extend라서 h-full, w-auto 같은 기본값은 남는다
+    extend: {
+      height: tokens.size,
+      width: tokens.size,
+      minHeight: tokens.size,
+      minWidth: tokens.size,
+    },
   },
   plugins: [typography],
 };

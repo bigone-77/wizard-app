@@ -180,6 +180,9 @@
     "level-1": "0px 2px 6px 0px rgba(0, 0, 0, 0.20)",
     "level-2": "0px 2px 6px 0px rgba(0, 0, 0, 0.40)"
   },
+  "size": {
+    "touch": "44px"
+  },
   "iconSize": {
     "s": 16,
     "m": 20,

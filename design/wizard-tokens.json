@@ -430,6 +430,12 @@
         "$value": "32px"
       }
     },
+    "size": {
+      "touch": {
+        "$type": "sizing",
+        "$value": "44px"
+      }
+    },
     "fontFamilies": {
       "pretendard": {
         "$type": "fontFamilies",

@@ -26,6 +26,12 @@ describe('디자인 토큰 테마 (tailwind.config.js)', () => {
     expect(styleOf('box')).toEqual({ paddingTop: 2, paddingBottom: 120 });
   });
 
+  it('크기 토큰 touch는 높이·너비·최소 크기에 쓴다 (h-touch, min-w-touch)', async () => {
+    await render(<View testID="box" className="h-touch min-w-touch" />, { config });
+
+    expect(styleOf('box')).toEqual({ height: 44, minWidth: 44 });
+  });
+
   it('그림자 토큰은 RN 그림자 속성이 된다', async () => {
     await render(<View testID="box" className="shadow-level-1" />, { config });
 

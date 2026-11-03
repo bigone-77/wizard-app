@@ -26,6 +26,7 @@ export type Theme = {
   spacing: Record<string, string>;
   borderRadius: Record<string, string>;
   boxShadow: Record<string, string>;
+  size: Record<string, string>;
   iconSize: Record<string, number>;
   typography: Record<string, TextStyle>;
   fonts: string[];
@@ -135,6 +136,12 @@ export function buildTheme(source: TokenSource): Theme {
     borderRadius[kebab(name)] = px(resolve(String(token.$value)));
   }
 
+  // 크기: 간격과 따로 둔다 (p-touch 같은 여백으로 쓰이지 않게). h-touch, min-w-touch
+  const size: Record<string, string> = {};
+  for (const [name, token] of byPrefix('size')) {
+    size[kebab(name)] = px(resolve(String(token.$value)));
+  }
+
   const iconSize: Record<string, number> = {};
   for (const [name, token] of byPrefix('iconSize')) {
     iconSize[kebab(name)] = parseFloat(resolve(String(token.$value)));
@@ -175,6 +182,7 @@ export function buildTheme(source: TokenSource): Theme {
     spacing,
     borderRadius,
     boxShadow,
+    size,
     iconSize,
     typography,
     fonts: [...fonts].sort(),
