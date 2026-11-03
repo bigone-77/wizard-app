@@ -18,6 +18,7 @@
     "expo-symbols": "~58.0.4",
     "expo-system-ui": "~58.0.7",
     "expo-web-browser": "~58.0.7",
+    "nativewind": "4.2.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",
@@ -32,9 +33,12 @@
     "@testing-library/react-native": "14.1.0",
     "@types/jest": "30.0.0",
     "@types/react": "~19.3.0",
+    "babel-preset-expo": "~58.0.23",
     "jest": "~30.5.2",
     "jest-expo": "~58.0.13",
-    "typescript": "~6.0.3"
+    "tailwindcss": "3.4.19",
+    "typescript": "~6.0.3",
+    "vitest": "5.1.0"
   },
   "scripts": {
     "start": "expo start",
@@ -42,10 +46,19 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "vitest run"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/src/__tests__/unit/",
+      "<rootDir>/src/__tests__/__mocks__/"
+    ],
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/src/__tests__/__mocks__/css-stub.js"
+    }
   },
   "private": true
 }
