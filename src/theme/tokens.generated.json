@@ -1,0 +1,317 @@
+{
+  "colors": {
+    "black": "#000000",
+    "white": "#ffffff",
+    "dim": "rgba(0, 0, 0, 0.7)",
+    "primary": {
+      "50": "#f5f3ff",
+      "100": "#ddd6ff",
+      "200": "#c4b4ff",
+      "300": "#a684ff",
+      "400": "#8e51ff",
+      "500": "#7f22fe",
+      "600": "#7008e7",
+      "700": "#5d0ec0",
+      "800": "#4d179a",
+      "900": "#2f0d68",
+      "950": "#14082e"
+    },
+    "gray": {
+      "50": "#f9fafb",
+      "100": "#f3f4f6",
+      "200": "#e5e7eb",
+      "300": "#d1d5dc",
+      "400": "#99a1af",
+      "500": "#6a7282",
+      "600": "#4a5565",
+      "700": "#364153",
+      "800": "#1e2939",
+      "900": "#101828",
+      "950": "#030712"
+    },
+    "red": {
+      "50": "#fef2f2",
+      "100": "#ffe2e2",
+      "200": "#ffc9c9",
+      "300": "#ffa2a2",
+      "400": "#ff6467",
+      "450": "#fd4249",
+      "500": "#fb2c36",
+      "600": "#e7000b",
+      "700": "#c10007",
+      "800": "#9f0712",
+      "900": "#82181a",
+      "950": "#460809"
+    },
+    "orange": {
+      "50": "#fff7ed",
+      "100": "#ffedd4",
+      "200": "#ffd6a7",
+      "300": "#ffb86a",
+      "400": "#ff8904",
+      "500": "#ff6900",
+      "600": "#f54900",
+      "700": "#ca3500",
+      "800": "#9f2d00",
+      "900": "#7e2a0c",
+      "950": "#441306"
+    },
+    "yellow": {
+      "50": "#fefce8",
+      "100": "#fef9c2",
+      "200": "#fff085",
+      "300": "#ffdf20",
+      "400": "#fdc700",
+      "500": "#f0b100",
+      "600": "#d08700",
+      "700": "#a65f00",
+      "800": "#894b00",
+      "900": "#733e0a",
+      "950": "#432004"
+    },
+    "green": {
+      "50": "#f0fdf4",
+      "100": "#dcfce7",
+      "200": "#b9f8cf",
+      "300": "#7bf1a8",
+      "400": "#05df72",
+      "500": "#00c950",
+      "600": "#00a63e",
+      "700": "#008236",
+      "800": "#016630",
+      "900": "#0d542b",
+      "950": "#032e15"
+    },
+    "blue": {
+      "50": "#eff6ff",
+      "100": "#dbeafe",
+      "200": "#bedbff",
+      "300": "#8ec5ff",
+      "400": "#51a2ff",
+      "500": "#2b7fff",
+      "600": "#155dfc",
+      "700": "#1447e6",
+      "800": "#193cb8",
+      "900": "#1c398e",
+      "950": "#162456"
+    },
+    "text": {
+      "1": "#99a1af",
+      "2": "#4a5565",
+      "3": "#1e2939",
+      "primary": "#7008e7",
+      "inverse": "#ffffff"
+    },
+    "icon": {
+      "1": "#99a1af",
+      "2": "#364153",
+      "disable": "#d1d5dc",
+      "primary": "#7f22fe"
+    },
+    "button": {
+      "primary-1": "#7f22fe",
+      "primary-2": "#7008e7",
+      "primary-3": "#5d0ec0",
+      "outline-1": "#ffffff",
+      "outline-2": "#f9fafb",
+      "outline-3": "#f3f4f6"
+    },
+    "stroke": {
+      "contents": "#e5e7eb",
+      "header": "#d1d5dc",
+      "primary": "#8e51ff"
+    },
+    "bg": {
+      "1": "#ffffff",
+      "2": "#f9fafb",
+      "dim": "rgba(0, 0, 0, 0.7)"
+    },
+    "danger": {
+      "bg": "#fef2f2",
+      "fill": "#e7000b",
+      "text": "#c10007"
+    },
+    "success": {
+      "bg": "#eff6ff",
+      "fill-text": "#155dfc"
+    },
+    "signal": {
+      "red": {
+        "bg": "#fef2f2",
+        "fill": "#e7000b",
+        "text": "#c10007"
+      },
+      "orange": {
+        "bg": "#fff7ed",
+        "fill": "#ca3500",
+        "text": "#ca3500"
+      },
+      "green": {
+        "bg": "#f0fdf4",
+        "fill": "#008236",
+        "text": "#008236"
+      }
+    }
+  },
+  "spacing": {
+    "0": "0px",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "15": "60px",
+    "30": "120px",
+    "0.5": "2px",
+    "1.5": "6px"
+  },
+  "borderRadius": {
+    "4": "4px",
+    "8": "8px",
+    "12": "12px",
+    "16": "16px",
+    "1000": "1000px"
+  },
+  "boxShadow": {
+    "level-0": "0px 2px 4px 0px rgba(0, 0, 0, 0.10)",
+    "level-1": "0px 2px 6px 0px rgba(0, 0, 0, 0.20)",
+    "level-2": "0px 2px 6px 0px rgba(0, 0, 0, 0.40)"
+  },
+  "iconSize": {
+    "s": 16,
+    "m": 20,
+    "l": 24,
+    "xl": 32
+  },
+  "typography": {
+    "special-m-40": {
+      "fontFamily": "Pretendard-Medium",
+      "fontSize": 40,
+      "lineHeight": 44,
+      "letterSpacing": -0.8
+    },
+    "title-xl-32": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 32,
+      "lineHeight": 36,
+      "letterSpacing": -0.64
+    },
+    "title-m-26-2": {
+      "fontFamily": "Pretendard-Bold",
+      "fontSize": 26,
+      "lineHeight": 36,
+      "letterSpacing": -0.52
+    },
+    "title-m-26-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 26,
+      "lineHeight": 36,
+      "letterSpacing": -0.52
+    },
+    "title-s-22-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 22,
+      "lineHeight": 26,
+      "letterSpacing": -0.44
+    },
+    "title-s-22-1": {
+      "fontFamily": "Pretendard-Medium",
+      "fontSize": 22,
+      "lineHeight": 26,
+      "letterSpacing": -0.44
+    },
+    "title-exs-18": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 18,
+      "lineHeight": 22,
+      "letterSpacing": -0.36
+    },
+    "base-exl-18-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 18,
+      "lineHeight": 24,
+      "letterSpacing": -0.36
+    },
+    "base-exl-18-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 18,
+      "lineHeight": 24,
+      "letterSpacing": -0.36
+    },
+    "base-l-16-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 16,
+      "lineHeight": 20,
+      "letterSpacing": -0.32
+    },
+    "base-l-16-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 16,
+      "lineHeight": 20,
+      "letterSpacing": -0.32
+    },
+    "base-m-14-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 14,
+      "lineHeight": 18,
+      "letterSpacing": -0.28
+    },
+    "base-m-14-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 14,
+      "lineHeight": 18,
+      "letterSpacing": -0.28
+    },
+    "base-s-12-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 12,
+      "lineHeight": 16,
+      "letterSpacing": -0.24
+    },
+    "base-s-12-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 12,
+      "lineHeight": 16,
+      "letterSpacing": -0.24
+    },
+    "base-exs-10-2": {
+      "fontFamily": "Pretendard-SemiBold",
+      "fontSize": 10,
+      "lineHeight": 12,
+      "letterSpacing": -0.2
+    },
+    "base-exs-10-1": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 10,
+      "lineHeight": 12,
+      "letterSpacing": -0.2
+    },
+    "body-l-16": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 16,
+      "lineHeight": 24,
+      "letterSpacing": -0.32
+    },
+    "body-m-14": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 14,
+      "lineHeight": 21,
+      "letterSpacing": -0.28
+    },
+    "caption-m-12": {
+      "fontFamily": "Pretendard-Regular",
+      "fontSize": 12,
+      "lineHeight": 16,
+      "letterSpacing": -0.24
+    }
+  },
+  "fonts": [
+    "Pretendard-Bold",
+    "Pretendard-Medium",
+    "Pretendard-Regular",
+    "Pretendard-SemiBold"
+  ]
+}
