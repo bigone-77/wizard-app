@@ -2,6 +2,8 @@ import { Text, View } from 'react-native';
 import { render, screen } from 'nativewind/test';
 
 // tailwind.config.js에서 content만 빼고 넘긴다 (테스트 도구가 렌더한 className을 직접 모음)
+// tailwind.config.js는 CommonJS라 require로 읽는다
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { content: _content, ...config } = require('../../tailwind.config.js');
 
 const styleOf = (testID: string) => screen.getByTestId(testID).props.style;
@@ -63,6 +65,8 @@ describe('디자인 토큰 테마 (tailwind.config.js)', () => {
   });
 
   it('토큰에 없는 값은 스타일이 생기지 않는다 (색·간격 하드코딩 방지)', async () => {
+    // 토큰에 없는 값이 스타일을 만들지 않는지 보는 테스트라 일부러 쓴다
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     await render(<View testID="box" className="bg-sky-500 p-7 text-sm" />, { config });
 
     expect(styleOf('box')).toBeUndefined();
