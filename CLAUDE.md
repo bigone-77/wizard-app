@@ -178,11 +178,15 @@ pnpm exec tsc --noEmit        # 타입 검사 (strict)
 pnpm test                     # Jest 컴포넌트·화면 테스트
 pnpm test:unit                # Vitest 순수 로직 테스트 (src/__tests__/unit/)
 pnpm tokens                   # design/wizard-tokens.json → src/theme/tokens.generated.json
+pnpm lint                     # ESLint (= expo lint). 토큰에 없는 클래스, 대괄호 값은 오류
+pnpm format                   # Prettier로 서식 맞추기, className 정렬 (검사만: pnpm format:check)
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```
 
 - 패키지 매니저는 **pnpm**
+- 커밋할 때 바뀐 파일만 자동으로 lint·format이 돈다 (husky, lint-staged). 막히면 오류를 고친다. `--no-verify`로 건너뛰지 않는다
+- 타입 검사와 테스트는 훅에 없다. PR을 만들기 전에 `pnpm exec tsc --noEmit`, `pnpm test`, `pnpm test:unit`을 직접 돌린다
 - 터미널 명령에 `!`를 넣지 않는다 (zsh에서 문제를 일으킨다)
 
 ---
