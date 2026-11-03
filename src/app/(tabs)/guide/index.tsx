@@ -1,12 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
 // S12 가이드
 export default function GuideScreen() {
-  return <View testID="screen-S12" style={styles.container} />;
+  return <View testID="screen-S12" className="flex-1 bg-bg-1" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
