@@ -35,6 +35,18 @@ describe('하단 탭 (16-architecture 4장 화면과 경로)', () => {
     expect(colors.gray['500']).toBe('#6a7282');
   });
 
+  it('탭 이름은 typo-base-s-12-2 (Pretendard SemiBold 12/16)', async () => {
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+
+    const label = within(screen.getByTestId('tab-home')).getByText('홈');
+    expect(StyleSheet.flatten(label.props.style)).toMatchObject({
+      fontFamily: 'Pretendard-SemiBold',
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: -0.24,
+    });
+  });
+
   it.each([
     ['/records', 'screen-S10'],
     ['/doctor', 'screen-S08'],
