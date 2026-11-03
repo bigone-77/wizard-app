@@ -109,6 +109,11 @@
 - 앱 실행 이동 규칙은 `src/app/_layout.tsx` 한 곳에서만 처리
 - 사전 설계 흐름의 문구 치환(`{pet_name}`)은 앱이 처리
 - 스타일은 디자인 토큰만 사용. 색·간격을 하드코딩하지 않는다
+  - 원본은 `design/wizard-tokens.json` (Figma Tokens Studio 내보내기). 고친 뒤 `pnpm tokens`로 `src/theme/tokens.generated.json`을 다시 만든다 (생성 파일은 직접 수정하지 않음)
+  - 토큰을 추가하면 Figma에도 같은 토큰을 넣는다 (Figma에서 다시 내보내면 JSON을 덮어쓴다)
+  - 화면은 `className`의 토큰 클래스로 (`bg-bg-1`, `p-4`, `h-touch`, `typo-base-m-14-1`). `className`을 받지 않는 곳만 `@/theme`의 값을 쓴다
+  - **대괄호 값(`h-[44px]`, `bg-[#fff]`)은 쓰지 않는다.** 필요한 값이 토큰에 없으면 토큰을 추가한다
+  - 글자는 `typo-*` 묶음 클래스로만 지정한다 (`text-sm`, `font-bold`는 없음)
 - 개체 수 제한, 박사 예산을 앱 코드에 하드코딩하지 않는다 (서버 설정값)
 
 ---
@@ -144,6 +149,7 @@
 - [ ] 지도 앱 바로가기
 - [ ] PDF 공유
 - [ ] 하드웨어 뒤로 가기
+- [ ] Pretendard 굵기 4종, 그림자 표시
 
 ---
 
@@ -170,6 +176,8 @@ pnpm ios                      # = npx expo run:ios. 개발 빌드를 만들어 �
 npx expo start --dev-client   # 이미 설치된 개발 빌드에 Metro만 붙임 (네이티브 변경 없을 때)
 pnpm exec tsc --noEmit        # 타입 검사 (strict)
 pnpm test                     # Jest 컴포넌트·화면 테스트
+pnpm test:unit                # Vitest 순수 로직 테스트 (src/__tests__/unit/)
+pnpm tokens                   # design/wizard-tokens.json → src/theme/tokens.generated.json
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```
