@@ -2,13 +2,15 @@ import { Text, View } from 'react-native';
 import { render, screen } from 'nativewind/test';
 
 // tailwind.config.js에서 content만 빼고 넘긴다 (테스트 도구가 렌더한 className을 직접 모음)
+// tailwind.config.js는 CommonJS라 require로 읽는다
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { content: _content, ...config } = require('../../tailwind.config.js');
 
 const styleOf = (testID: string) => screen.getByTestId(testID).props.style;
 
 describe('디자인 토큰 테마 (tailwind.config.js)', () => {
   it('시맨틱 색, 간격, 모서리 토큰이 RN 스타일이 된다', async () => {
-    await render(<View testID="box" className="bg-bg-2 p-4 rounded-12 border-stroke-contents" />, {
+    await render(<View testID="box" className="rounded-12 border-stroke-contents bg-bg-2 p-4" />, {
       config,
     });
 
@@ -21,7 +23,7 @@ describe('디자인 토큰 테마 (tailwind.config.js)', () => {
   });
 
   it('간격 이름은 Tailwind 숫자와 같다 (p-0.5 = 2px, p-30 = 120px)', async () => {
-    await render(<View testID="box" className="pt-0.5 pb-30" />, { config });
+    await render(<View testID="box" className="pb-30 pt-0.5" />, { config });
 
     expect(styleOf('box')).toEqual({ paddingTop: 2, paddingBottom: 120 });
   });
@@ -45,7 +47,7 @@ describe('디자인 토큰 테마 (tailwind.config.js)', () => {
 
   it('typo-* 하나로 폰트, 크기, 줄 높이, 자간이 함께 들어간다', async () => {
     await render(
-      <Text testID="text" className="typo-base-m-14-2 text-text-3">
+      <Text testID="text" className="text-text-3 typo-base-m-14-2">
         박사
       </Text>,
       { config },
@@ -63,6 +65,8 @@ describe('디자인 토큰 테마 (tailwind.config.js)', () => {
   });
 
   it('토큰에 없는 값은 스타일이 생기지 않는다 (색·간격 하드코딩 방지)', async () => {
+    // 토큰에 없는 값이 스타일을 만들지 않는지 보는 테스트라 일부러 쓴다
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     await render(<View testID="box" className="bg-sky-500 p-7 text-sm" />, { config });
 
     expect(styleOf('box')).toBeUndefined();

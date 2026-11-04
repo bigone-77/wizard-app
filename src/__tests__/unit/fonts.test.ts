@@ -10,9 +10,7 @@ const appJson = JSON.parse(readFileSync(resolve(root, 'app.json'), 'utf8'));
 
 // expo-font 플러그인은 빌드할 때 폰트를 앱에 넣는다. 폰트 이름 = 파일 이름 (iOS, Android 모두)
 const embedded = (): string[] => {
-  const entry = appJson.expo.plugins.find(
-    (p: unknown) => Array.isArray(p) && p[0] === 'expo-font',
-  );
+  const entry = appJson.expo.plugins.find((p: unknown) => Array.isArray(p) && p[0] === 'expo-font');
   return entry ? entry[1].fonts : [];
 };
 
