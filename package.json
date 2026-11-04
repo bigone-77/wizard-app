@@ -70,7 +70,11 @@
     "tokens": "node --experimental-strip-types --no-warnings src/theme/build-tokens.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:start": "npx supabase start --workdir ../wizard-backend -x studio,postgres-meta,realtime,logflare,vector,imgproxy,mailpit,supavisor,edge-runtime",
+    "db:stop": "npx supabase stop --workdir ../wizard-backend",
+    "env:local": "node --experimental-strip-types --no-warnings src/scripts/use-env.ts local",
+    "env:dev": "node --experimental-strip-types --no-warnings src/scripts/use-env.ts dev"
   },
   "jest": {
     "preset": "jest-expo",
