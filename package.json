@@ -75,7 +75,8 @@
     "db:start": "npx supabase start --workdir ../wizard-backend -x studio,postgres-meta,realtime,logflare,vector,imgproxy,mailpit,supavisor,edge-runtime",
     "db:stop": "npx supabase stop --workdir ../wizard-backend",
     "env:local": "node --experimental-strip-types --no-warnings src/scripts/use-env.ts local",
-    "env:dev": "node --experimental-strip-types --no-warnings src/scripts/use-env.ts dev"
+    "env:dev": "node --experimental-strip-types --no-warnings src/scripts/use-env.ts dev",
+    "db:types": "node --experimental-strip-types --no-warnings src/scripts/db-types.ts"
   },
   "jest": {
     "preset": "jest-expo",
