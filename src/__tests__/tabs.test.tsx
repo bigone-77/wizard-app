@@ -1,5 +1,9 @@
+import './__mocks__/app-mocks';
+
 import { fireEvent, renderRouter, screen, within } from 'expo-router/testing-library';
 import { StyleSheet } from 'react-native';
+
+import { createFakeAuth, fakeSession, testAuth } from './__mocks__/fake-auth';
 
 import { colors } from '@/theme';
 
@@ -10,6 +14,11 @@ const APP_DIR = './src/app';
 const tabButtons = () => screen.getAllByTestId(/^tab-/);
 
 describe('하단 탭 (16-architecture 4장 화면과 경로)', () => {
+  // 탭은 로그인한 뒤에만 열린다 (이동 규칙 1단계)
+  beforeEach(() => {
+    testAuth.current = createFakeAuth(fakeSession);
+  });
+
   it('시작 경로 /는 S06 홈', async () => {
     await renderRouter(APP_DIR, { initialUrl: '/' });
 

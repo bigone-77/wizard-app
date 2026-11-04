@@ -45,6 +45,12 @@
             "./assets/fonts/Pretendard-Bold.otf"
           ]
         }
+      ],
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": false
+        }
       ]
     ],
     "experiments": {

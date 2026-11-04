@@ -5,6 +5,7 @@ pnpm-lock.yaml
 
 # 생성 파일 (pnpm tokens), Figma 내보내기 원본: 손으로 고치지 않는다
 src/theme/tokens.generated.json
+src/types/database.ts
 design/
 
 # Xcode 아이콘 도구 등이 만드는 에셋 파일
