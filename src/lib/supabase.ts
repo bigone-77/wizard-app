@@ -1,5 +1,5 @@
 // Supabase 클라이언트 (16-architecture 3장·5장). 주소와 키는 env(local/dev/alpha)로 바뀐다
-// DB 타입(Database 제네릭)은 T013에서 src/types/database.ts를 만든 뒤 붙인다
+// 테이블·컬럼 타입은 src/types/database.ts (pnpm db:types로 생성)
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
@@ -9,6 +9,8 @@ import * as SecureStore from 'expo-secure-store';
 import { AppState } from 'react-native';
 
 import { getEnv } from './env';
+
+import type { Database } from '@/types/database';
 
 /**
  * 세션 저장소: 값마다 새 암호화 키(256비트)를 만들어 SecureStore(Keychain)에 두고,
@@ -46,7 +48,7 @@ export const secureSessionStorage = {
 
 const env = getEnv();
 
-export const supabase = createClient(env.supabaseUrl, env.supabaseAnonKey, {
+export const supabase = createClient<Database>(env.supabaseUrl, env.supabaseAnonKey, {
   auth: {
     storage: secureSessionStorage,
     persistSession: true,
