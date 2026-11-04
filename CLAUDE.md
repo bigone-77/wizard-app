@@ -128,7 +128,12 @@
 | `EXPO_PUBLIC_ENABLE_EMAIL_LOGIN` | `true`                   | `true`          | `false`       |
 
 - 항상 **개발 빌드**로 실행한다 (Expo Go는 푸시 불가)
-- 로컬 Supabase는 `wizard-backend`에서 `npx supabase start`
+- **평소 개발은 로컬 Supabase(Docker)**, 소셜 로그인과 푸시만 dev 클라우드(`wizard-dev`) (T011에서 결정)
+  - 로컬은 `pnpm db:start`로 켠다. 안 쓰는 컨테이너(Studio, Realtime, 로그·분석 등)를 빼고 켜서 메모리를 아낀다. Studio가 필요하면 `wizard-backend`에서 `npx supabase start`로 전부 켠다
+  - 서버 함수(`supabase/functions/`)가 생기면 `db:start`의 제외 목록에서 `edge-runtime`을 지운다
+- 환경 전환: `pnpm env:local` 또는 `pnpm env:dev`로 `.env`를 바꾼 뒤 `npx expo start --dev-client --clear`
+  - `.env`, `.env.dev`는 커밋하지 않는다 (`.env.example`만). `.env.local`이라는 이름은 쓰지 않는다 (Expo가 항상 읽음)
+  - 앱에 넣는 키는 anon(publishable) 키만. service_role·secret 키는 `src/lib/env.ts` 검사에서 실패한다
 
 ---
 
@@ -150,6 +155,7 @@
 - [ ] PDF 공유
 - [ ] 하드웨어 뒤로 가기
 - [ ] Pretendard 굵기 4종, 그림자 표시
+- [ ] 로컬 Supabase 주소: 에뮬레이터에서 `127.0.0.1`은 에뮬레이터 자신이다 (`10.0.2.2` 또는 `adb reverse tcp:54321 tcp:54321`)
 
 ---
 
@@ -157,12 +163,11 @@
 
 기획 문서의 **"미정"** 항목은 임의로 정하지 않는다. 후보와 장단점을 정리해 사용자에게 묻는다.
 
-| 항목                                                    | 정할 때                |
-| ------------------------------------------------------- | ---------------------- |
-| 스타일 라이브러리                                       | T010                   |
-| 평소 개발 때 붙을 Supabase (로컬 Docker / dev 클라우드) | T011 (메모리 8GB 고려) |
-| STT 서비스                                              | T034                   |
-| LLM 서비스·모델                                         | T045                   |
+| 항목              | 정할 때 |
+| ----------------- | ------- |
+| 스타일 라이브러리 | T010    |
+| STT 서비스        | T034    |
+| LLM 서비스·모델   | T045    |
 
 ---
 
@@ -180,6 +185,9 @@ pnpm test:unit                # Vitest 순수 로직 테스트 (src/__tests__/un
 pnpm tokens                   # design/wizard-tokens.json → src/theme/tokens.generated.json
 pnpm lint                     # ESLint (= expo lint). 토큰에 없는 클래스, 대괄호 값은 오류
 pnpm format                   # Prettier로 서식 맞추기, className 정렬 (검사만: pnpm format:check)
+pnpm db:start                 # 로컬 Supabase 켜기 (../wizard-backend, 안 쓰는 컨테이너 제외). 끄기: pnpm db:stop
+pnpm env:local                # .env를 로컬 Supabase 값으로 (supabase status에서 자동 생성)
+pnpm env:dev                  # .env를 .env.dev 값으로 (검사 후 복사)
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```
