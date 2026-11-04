@@ -96,7 +96,7 @@
 - `src/contracts/`의 zod 스키마는 **16-architecture.md 16장**과 정확히 일치해야 한다 (backend의 `_shared/contracts.ts`와 같은 내용)
 - jsonb 컬럼(`care_records.data`, `ai_messages.payload`)은 반드시 `src/contracts/` 스키마로 파싱
 - 형식을 바꿔야 하면 코드부터 바꾸지 않는다. 순서: 기획 문서 16장, `wizard-backend`, 이 저장소
-- DB 타입(`src/types/database.ts`)은 **자동 생성 파일**이라 직접 수정하지 않는다. backend 마이그레이션이 바뀌면 `pnpm db:types`로 재생성 (T013에서 만듦)
+- DB 타입(`src/types/database.ts`)은 **자동 생성 파일**이라 직접 수정하지 않는다. backend 마이그레이션이 바뀌면 `pnpm db:start` 후 `pnpm db:types`로 재생성한다 (로컬 DB의 public 스키마에서 생성, 실패하면 기존 파일은 그대로)
 
 ---
 
@@ -174,7 +174,7 @@
 
 ## 명령어
 
-T008에서 iOS 기준으로 확정. `db:types`는 T013에서 추가한다.
+T008에서 iOS 기준으로 확정.
 
 ```bash
 pnpm install                  # 의존성 설치
@@ -189,6 +189,7 @@ pnpm format                   # Prettier로 서식 맞추기, className 정렬 (
 pnpm db:start                 # 로컬 Supabase 켜기 (../wizard-backend, 안 쓰는 컨테이너 제외). 끄기: pnpm db:stop
 pnpm env:local                # .env를 로컬 Supabase 값으로 (supabase status에서 자동 생성)
 pnpm env:dev                  # .env를 .env.dev 값으로 (검사 후 복사)
+pnpm db:types                 # 로컬 DB에서 src/types/database.ts 생성 (pnpm db:start 먼저)
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```
