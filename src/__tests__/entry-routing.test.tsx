@@ -135,4 +135,22 @@ describe('앱 실행 이동 규칙 2단계: 경험 수준 (16-architecture 4.3, 
     expect(await screen.findByTestId('screen-S02')).toBeOnTheScreen();
     expect(profiles.select).toHaveBeenCalledTimes(4);
   }, 10000);
+
+  it.each([
+    ['pre_adoption', 'screen-S03', '/pre-adoption'],
+    ['experienced', 'screen-S04', '/register-pet'],
+  ])('%s를 고르면 %s에 머무르고 홈으로 바뀌지 않는다', async (level, testId, path) => {
+    testProfiles.current = createFakeProfiles(null);
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+    await screen.findByTestId('screen-S02');
+
+    await fireEvent.press(screen.getByTestId(`choice-${level}`));
+    expect(await screen.findByTestId(testId)).toBeOnTheScreen();
+
+    // 저장 뒤 캐시가 바뀌어 S02가 닫히고 홈이 열려도, 지금 화면은 그대로여야 한다
+    await act(async () => {});
+    expect(screen.getByTestId(testId)).toBeOnTheScreen();
+    expect(screen.queryByTestId('screen-S06')).toBeNull();
+    expect(screen).toHavePathname(path);
+  });
 });
