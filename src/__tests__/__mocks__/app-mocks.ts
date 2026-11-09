@@ -5,6 +5,7 @@ jest.mock('@/lib/supabase', () => ({
     get auth() {
       return require('./fake-auth').testAuth.current.auth;
     },
+    from: (table: string) => require('./fake-auth').testProfiles.current.from(table),
   },
 }));
 jest.mock('@/lib/env', () => ({
@@ -14,5 +15,12 @@ jest.mock('expo-splash-screen', () => ({
   preventAutoHideAsync: jest.fn(async () => {}),
   hideAsync: jest.fn(async () => {}),
 }));
+
+// 캐시(queryClient)는 모듈 하나라 테스트끼리 이어진다. 앞 테스트의 프로필이 남지 않게 매번 비우고 기본 사용자로 되돌린다
+afterEach(() => {
+  require('@/lib/query-client').queryClient.clear();
+  const fake = require('./fake-auth');
+  fake.testProfiles.current = fake.createFakeProfiles('experienced');
+});
 
 export {};
