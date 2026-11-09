@@ -96,7 +96,7 @@
 - `src/contracts/`의 zod 스키마는 **16-architecture.md 16장**과 정확히 일치해야 한다 (backend의 `_shared/contracts.ts`와 같은 내용)
 - jsonb 컬럼(`care_records.data`, `ai_messages.payload`)은 반드시 `src/contracts/` 스키마로 파싱
 - 형식을 바꿔야 하면 코드부터 바꾸지 않는다. 순서: 기획 문서 16장, `wizard-backend`, 이 저장소
-- DB 타입(`src/types/database.ts`)은 **자동 생성 파일**이라 직접 수정하지 않는다. backend 마이그레이션이 바뀌면 `pnpm db:types`로 재생성 (T013에서 만듦)
+- DB 타입(`src/types/database.ts`)은 **자동 생성 파일**이라 직접 수정하지 않는다. backend 마이그레이션이 바뀌면 `pnpm db:start` 후 `pnpm db:types`로 재생성한다 (로컬 DB의 public 스키마에서 생성, 실패하면 기존 파일은 그대로)
 
 ---
 
@@ -128,7 +128,12 @@
 | `EXPO_PUBLIC_ENABLE_EMAIL_LOGIN` | `true`                   | `true`          | `false`       |
 
 - 항상 **개발 빌드**로 실행한다 (Expo Go는 푸시 불가)
-- 로컬 Supabase는 `wizard-backend`에서 `npx supabase start`
+- **평소 개발은 로컬 Supabase(Docker)**, 소셜 로그인과 푸시만 dev 클라우드(`wizard-dev`) (T011에서 결정)
+  - 로컬은 `pnpm db:start`로 켠다. 안 쓰는 컨테이너(Studio, Realtime, 로그·분석 등)를 빼고 켜서 메모리를 아낀다. Studio가 필요하면 `wizard-backend`에서 `npx supabase start`로 전부 켠다
+  - 서버 함수(`supabase/functions/`)가 생기면 `db:start`의 제외 목록에서 `edge-runtime`을 지운다
+- 환경 전환: `pnpm env:local` 또는 `pnpm env:dev`로 `.env`를 바꾼 뒤 `npx expo start --dev-client --clear`
+  - `.env`, `.env.dev`는 커밋하지 않는다 (`.env.example`만). `.env.local`이라는 이름은 쓰지 않는다 (Expo가 항상 읽음)
+  - 앱에 넣는 키는 anon(publishable) 키만. service_role·secret 키는 `src/lib/env.ts` 검사에서 실패한다
 
 ---
 
@@ -150,6 +155,8 @@
 - [ ] PDF 공유
 - [ ] 하드웨어 뒤로 가기
 - [ ] Pretendard 굵기 4종, 그림자 표시
+- [ ] 로그인 화면(S01): 키보드가 입력칸을 가리지 않음
+- [ ] 로컬 Supabase 주소: 에뮬레이터에서 `127.0.0.1`은 에뮬레이터 자신이다 (`10.0.2.2` 또는 `adb reverse tcp:54321 tcp:54321`)
 
 ---
 
@@ -157,18 +164,17 @@
 
 기획 문서의 **"미정"** 항목은 임의로 정하지 않는다. 후보와 장단점을 정리해 사용자에게 묻는다.
 
-| 항목                                                    | 정할 때                |
-| ------------------------------------------------------- | ---------------------- |
-| 스타일 라이브러리                                       | T010                   |
-| 평소 개발 때 붙을 Supabase (로컬 Docker / dev 클라우드) | T011 (메모리 8GB 고려) |
-| STT 서비스                                              | T034                   |
-| LLM 서비스·모델                                         | T045                   |
+| 항목              | 정할 때 |
+| ----------------- | ------- |
+| 스타일 라이브러리 | T010    |
+| STT 서비스        | T034    |
+| LLM 서비스·모델   | T045    |
 
 ---
 
 ## 명령어
 
-T008에서 iOS 기준으로 확정. `db:types`는 T013에서 추가한다.
+T008에서 iOS 기준으로 확정.
 
 ```bash
 pnpm install                  # 의존성 설치
@@ -180,6 +186,10 @@ pnpm test:unit                # Vitest 순수 로직 테스트 (src/__tests__/un
 pnpm tokens                   # design/wizard-tokens.json → src/theme/tokens.generated.json
 pnpm lint                     # ESLint (= expo lint). 토큰에 없는 클래스, 대괄호 값은 오류
 pnpm format                   # Prettier로 서식 맞추기, className 정렬 (검사만: pnpm format:check)
+pnpm db:start                 # 로컬 Supabase 켜기 (../wizard-backend, 안 쓰는 컨테이너 제외). 끄기: pnpm db:stop
+pnpm env:local                # .env를 로컬 Supabase 값으로 (supabase status에서 자동 생성)
+pnpm env:dev                  # .env를 .env.dev 값으로 (검사 후 복사)
+pnpm db:types                 # 로컬 DB에서 src/types/database.ts 생성 (pnpm db:start 먼저)
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
 ```

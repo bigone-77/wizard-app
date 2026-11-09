@@ -31,6 +31,6 @@ module.exports = defineConfig([
   },
   prettierConfig,
   {
-    ignores: ['ios/*', 'android/*', 'src/theme/tokens.generated.json'],
+    ignores: ['ios/*', 'android/*', 'src/theme/tokens.generated.json', 'src/types/database.ts'],
   },
 ]);
