@@ -43,3 +43,7 @@ example
 # generated native folders
 /ios
 /android
+
+# 디자인 참고 파일(화면 뼈대 등)은 로컬에만 둔다. 토큰 원본은 pnpm tokens가 읽으므로 커밋한다
+/design/*
+!/design/wizard-tokens.json
