@@ -39,6 +39,8 @@
 ## 작업 절차
 
 1. **할 일은 항상 `/start-task <ID>`로 시작한다** (예: `/start-task T012`). 이슈 확인, 기획 감시자 판단, 계획 제시, **승인 후** 구현
+   - `/start-task`는 **계획 모드**에서 실행한다. 계획 모드가 아니면 멈추고 안내한다
+   - 계획 모드 시작은 저장소 설정이 아니라 **각자 VS Code의 Claude Code 확장 설정**(초기 권한 모드 = plan)으로 켠다. 시작 모드는 개인 작업 습관이라서
 2. **승인받은 계획 밖의 파일을 바꿔야 하면 멈추고 이유를 설명한다**
 3. **테스트부터 쓴다.** 기대 동작은 15 완료 기준, 10 예외 상황, 16 11장 에러 처리, 13 정답지에서 가져온다
 4. **사용자가 설명을 듣지 못한 변경은 남기지 않는다.** 물어보면 무엇을 왜 바꿨는지 설명한다
@@ -108,6 +110,7 @@
 - 화면 ID(S01~S13)와 경로는 16-architecture.md 4장 표를 따른다
 - 앱 실행 이동 규칙은 `src/app/_layout.tsx` 한 곳에서만 처리
 - 사전 설계 흐름의 문구 치환(`{pet_name}`)은 앱이 처리
+- 스타일은 **NativeWind v4 (Tailwind 3)** (T010에서 결정). 다크 모드는 V0 이후
 - 스타일은 디자인 토큰만 사용. 색·간격을 하드코딩하지 않는다
   - 원본은 `design/wizard-tokens.json` (Figma Tokens Studio 내보내기). 고친 뒤 `pnpm tokens`로 `src/theme/tokens.generated.json`을 다시 만든다 (생성 파일은 직접 수정하지 않음)
   - 토큰을 추가하면 Figma에도 같은 토큰을 넣는다 (Figma에서 다시 내보내면 JSON을 덮어쓴다)
@@ -164,11 +167,10 @@
 
 기획 문서의 **"미정"** 항목은 임의로 정하지 않는다. 후보와 장단점을 정리해 사용자에게 묻는다.
 
-| 항목              | 정할 때 |
-| ----------------- | ------- |
-| 스타일 라이브러리 | T010    |
-| STT 서비스        | T034    |
-| LLM 서비스·모델   | T045    |
+| 항목            | 정할 때 |
+| --------------- | ------- |
+| STT 서비스      | T034    |
+| LLM 서비스·모델 | T045    |
 
 ---
 
@@ -180,18 +182,21 @@ T008에서 iOS 기준으로 확정.
 pnpm install                  # 의존성 설치
 pnpm ios                      # = npx expo run:ios. 개발 빌드를 만들어 시뮬레이터에 설치하고 Metro 실행
 npx expo start --dev-client   # 이미 설치된 개발 빌드에 Metro만 붙임 (네이티브 변경 없을 때)
+pnpm start                    # = expo start. Metro만 켬 (개발 빌드에 붙일 때는 위의 --dev-client)
 pnpm exec tsc --noEmit        # 타입 검사 (strict)
 pnpm test                     # Jest 컴포넌트·화면 테스트
 pnpm test:unit                # Vitest 순수 로직 테스트 (src/__tests__/unit/)
 pnpm tokens                   # design/wizard-tokens.json → src/theme/tokens.generated.json
 pnpm lint                     # ESLint (= expo lint). 토큰에 없는 클래스, 대괄호 값은 오류
 pnpm format                   # Prettier로 서식 맞추기, className 정렬 (검사만: pnpm format:check)
-pnpm db:start                 # 로컬 Supabase 켜기 (../wizard-backend, 안 쓰는 컨테이너 제외). 끄기: pnpm db:stop
+pnpm db:start                 # 로컬 Supabase 켜기 (../wizard-backend, 안 쓰는 컨테이너 제외)
+pnpm db:stop                  # 로컬 Supabase 끄기 (시뮬레이터와 Docker를 함께 켜지 않도록)
 pnpm env:local                # .env를 로컬 Supabase 값으로 (supabase status에서 자동 생성)
 pnpm env:dev                  # .env를 .env.dev 값으로 (검사 후 복사)
 pnpm db:types                 # 로컬 DB에서 src/types/database.ts 생성 (pnpm db:start 먼저)
 npx expo-doctor               # Expo 설정·의존성 점검
 pnpm android                  # = npx expo run:android. 개발 끝 무렵 점검 때만
+pnpm web                      # = expo start --web. Expo 기본 스크립트, V0에서는 쓰지 않음
 ```
 
 - 패키지 매니저는 **pnpm**
